@@ -15,8 +15,6 @@ import lombok.Setter;
 
 import com.app.enums.Role;
 
-
-
 @Entity
 @Table(name = "roles")
 //@RequiredArgsConstructor(staticName = "roleName")//need to ask...how to implement the java code for this
@@ -38,7 +36,7 @@ public class RoleEntity extends BaseEntity {
 		super();
 		this.roleName = roleName;
 	}
-
+	
 	public RoleEntity() {
 		super();
 	}

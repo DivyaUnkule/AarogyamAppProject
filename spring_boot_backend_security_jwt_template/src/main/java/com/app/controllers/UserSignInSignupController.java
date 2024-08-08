@@ -1,4 +1,4 @@
-package com.app.controller;
+package com.app.controllers;
 
 import java.io.IOException;
 
@@ -20,7 +20,7 @@ import com.app.dto.SigninResponse;
 import com.app.dto.Signup;
 import com.app.security.CustomUserDetails;
 import com.app.security.JwtUtils;
-import com.app.service.IUserService;
+import com.app.services.IUserService;
 
 @RestController
 @RequestMapping("/users")
@@ -67,5 +67,7 @@ public class UserSignInSignupController {
 		SigninResponse resp = new SigninResponse(jwtUtils.generateJwtToken(verifiedToken), "Successful Auth!!!!");
 		return ResponseEntity.status(HttpStatus.CREATED).body(resp);
 	}
+	
+	
 
 }
