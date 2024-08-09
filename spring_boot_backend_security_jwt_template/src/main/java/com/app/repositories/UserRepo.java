@@ -12,4 +12,6 @@ public interface UserRepo extends JpaRepository<Login, Long> {
 	@Query("select r.id from Login u join u.userRoles r where u.id = :Id")
 	Long findRoleIdByUserId(@Param("Id") Long Id);
 	
+	Login findByEmailIgnoreCase(String email);
+	
 }

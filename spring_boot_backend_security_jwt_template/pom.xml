@@ -113,6 +113,11 @@
     <version>1.18.26</version> <!-- Use the latest version available -->
     <scope>provided</scope>
 </dependency>
+<!-- Signup -->
+<dependency>
+    <groupId>com.fasterxml.jackson.core</groupId>
+    <artifactId>jackson-databind</artifactId>
+</dependency>
 
 	</dependencies>
 

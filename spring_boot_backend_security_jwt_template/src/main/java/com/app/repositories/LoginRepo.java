@@ -11,5 +11,7 @@ import com.app.entities.Login;
 public interface LoginRepo extends JpaRepository<Login, Long> {
 	@Query("select u from Login u join fetch u.userRoles where u.email=?1")
 	Optional<Login> findByEmail(String email);
+	
+	 Optional<Login> findByEmailIgnoreCase(String email);
 
 }

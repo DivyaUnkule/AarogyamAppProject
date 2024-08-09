@@ -10,6 +10,9 @@ import java.time.Clock;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,11 +20,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.app.custom_exception_handler.ResourceNotFoundException;
+import com.app.dto.ApiResponse;
+import com.app.dto.SigninRequest;
+import com.app.dto.SigninResponse;
 import com.app.dto.Signup;
 import com.app.dto.UserRegResponse;
 import com.app.entities.Login;
 import com.app.repositories.LoginRepo;
 import com.app.repositories.RoleEntityRepo;
+import com.app.repositories.UserRepo;
 import com.app.security.CustomUserDetails;
 
 
@@ -39,6 +47,9 @@ public class UserServiceImpl implements IUserService {
 		private PasswordEncoder encoder;
 		@Autowired
 		private RoleEntityRepo roleRepo;
+		@Autowired
+		private AuthenticationManager authMgr;
+
 		@Autowired
 		private LoginRepo loginRepo;
 		@Value("${file.profile.upload.location}")
@@ -59,7 +70,7 @@ public class UserServiceImpl implements IUserService {
 		// 3. encode pwd
 		userEntity.setPassword(encoder.encode(reqDTO.getPassword()));
 		
-	Clock clock = Clock.systemDefaultZone();
+	/*Clock clock = Clock.systemDefaultZone();
 	long milliSeconds = clock.millis();
          MultipartFile profilePictureFile = reqDTO.getProfilePicPath();
          String completePath = profilePictureFolderPath + File.separator + milliSeconds
@@ -67,7 +78,7 @@ public class UserServiceImpl implements IUserService {
 			Files.copy(profilePictureFile.getInputStream(), Paths.get(completePath),
 					StandardCopyOption.REPLACE_EXISTING);
 
-		userEntity.setProfilePicPath(completePath);
+		userEntity.setProfilePicPath(completePath);*/
 		userEntity.setUserRoles(roleRepo.findByRoleNameIn(reqDTO.getRoles()));
 		userEntity.setPassword(encoder.encode(reqDTO.getPassword()));
 		
@@ -80,7 +91,22 @@ public class UserServiceImpl implements IUserService {
 		return new UserRegResponse("User registered successfully with ID " + persistentUser.getId());
 	}
 
+	@Override
+	public ApiResponse uploadImage(Long userId, MultipartFile imageFile) throws IOException, ResourceNotFoundException{
+		Login user = userDao.findById(userId)
+				.orElseThrow(() -> new ResourceNotFoundException("Invalid client Id : Image Uploading failed!!!!!!!!"));
+		String targetPath = profilePictureFolderPath + File.separator + imageFile.getOriginalFilename();
+
+		System.out.println(targetPath);
+		Files.copy(imageFile.getInputStream(), Paths.get(targetPath), StandardCopyOption.REPLACE_EXISTING);
+		user.setProfilePicPath(targetPath);
+		return new ApiResponse("Image Uploaded successfully!");
+	}
 	
-	
+	@Override
+	public Login fetchByEmail(String email) {
+	    return loginRepo.findByEmailIgnoreCase(email)
+	        .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
+	}
 
 }

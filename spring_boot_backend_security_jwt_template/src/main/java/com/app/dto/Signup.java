@@ -36,8 +36,8 @@ public class Signup {
 	private String firstName;
 	@Column
 	private String lastName;
-	@Column(nullable = false)
-	private MultipartFile profilePicPath;
+	/*@Column(nullable = false)
+	private MultipartFile profilePicPath;*/
 	@Column(length = 14, unique = true)
 	private String phoneNo;
 	@Enumerated(EnumType.STRING)
@@ -61,7 +61,7 @@ public class Signup {
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.profilePicPath = profilePicPath;
+		//this.profilePicPath = profilePicPath;
 		this.phoneNo = phoneNo;
 		this.status = status;
 		this.address = address;
@@ -102,12 +102,12 @@ public class Signup {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public MultipartFile getProfilePicPath() {
+	/*public MultipartFile getProfilePicPath() {
 		return profilePicPath;
 	}
 	public void setProfilePicPath(MultipartFile profilePicPath) {
 		this.profilePicPath = profilePicPath;
-	}
+	}*/
 	public String getPhoneNo() {
 		return phoneNo;
 	}
@@ -141,7 +141,7 @@ public class Signup {
 	@Override
 	public String toString() {
 		return "Signup [userId=" + userId + ", email=" + email + ", password=" + password + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", profilePicPath=" + profilePicPath + ", phoneNo=" + phoneNo + ", status="
+				+ ", lastName=" + lastName + ", phoneNo=" + phoneNo + ", status="
 				+ status + ", address=" + address + ", gender=" + gender + ", roles=" + roles + "]";
 	}
 	

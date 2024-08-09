@@ -22,11 +22,11 @@ import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
-import lombok.extern.slf4j.Slf4j;
+//import lombok.extern.slf4j.Slf4j;
 
 
 @Component
-@Slf4j
+//@Slf4j
 public class JwtUtils {
 	private static final Logger log = LoggerFactory.getLogger(JwtAuthenticationFilter.class);
 
@@ -56,6 +56,9 @@ public class JwtUtils {
                 .signWith(key, SignatureAlgorithm.HS512)
                 .compact();
     }
+    
+    
+
 
     public String getUserNameFromJwtToken(Claims claims) {
         return claims.getSubject();

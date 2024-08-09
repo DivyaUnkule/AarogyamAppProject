@@ -16,6 +16,7 @@ import javax.validation.constraints.Email;
 
 import com.app.enums.Gender;
 import com.app.enums.Status;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "users")
@@ -27,12 +28,13 @@ public class Login extends BaseEntity {
 	private String password;
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+	@JsonIgnore //o skip serializing the userRoles in one direction:used to avoid recursion
 	private Set<RoleEntity> userRoles = new HashSet<>();
     @Column
 	private String firstName;
 	@Column
 	private String lastName;
-	@Column(nullable = false)
+	@Column(length=300)
 	private String profilePicPath;
 	@Column(length = 14, unique = true)
 	private String phoneNo;
@@ -67,15 +69,6 @@ public class Login extends BaseEntity {
 
 	public void setUserRoles(Set<RoleEntity> userRoles) {
 		this.userRoles = userRoles;
-	}
-
-	
-
-	@PrePersist
-	protected void onCreate() {
-		if (status == null) {
-			status = Status.INACTIVE;
-		}
 	}
 
 	public String getFirstName() {

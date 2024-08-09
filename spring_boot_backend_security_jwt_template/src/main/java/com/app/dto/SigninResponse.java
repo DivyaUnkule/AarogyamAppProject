@@ -1,34 +1,37 @@
 package com.app.dto;
 
-import java.time.LocalDateTime;
+import com.app.entities.Login;
 
 public class SigninResponse {
 	private String jwt;
-	private String message;
+	private Login user;
 	
+	
+	public SigninResponse() {
+		super();
+	}
+	public SigninResponse(String jwt, Login user) {
+		super();
+		this.jwt = jwt;
+		this.user = user;
+	}
 	public String getJwt() {
 		return jwt;
 	}
 	public void setJwt(String jwt) {
 		this.jwt = jwt;
 	}
-	public String getMessage() {
-		return message;
+	public Login getUser() {
+		return user;
 	}
-	public void setMessage(String message) {
-		this.message = message;
+	public void setUser(Login user) {
+		this.user = user;
+	}
+	@Override
+	public String toString() {
+		return "SigninResponse [jwt=" + jwt + ", user=" + user + "]";
 	}
 	
-	
-	public SigninResponse(String jwt, String message) {
-		super();
-		this.jwt = jwt;
-		this.message = message;
-		
-	}
-	public SigninResponse() {
-		super();
-	}
 	
 	
 }

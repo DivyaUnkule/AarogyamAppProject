@@ -51,6 +51,7 @@ public class SecurityConfig {
         .antMatchers("/users/weightgainuser/**").permitAll()
         .antMatchers("/users/regularuser/**").permitAll()
         .antMatchers("/users/user/**").permitAll()
+        .antMatchers("/users/{Id}/image_upload").permitAll()
         .anyRequest().authenticated()
 		.and()
 		//to tell spring sec : not to use HttpSession to store user's auth details
@@ -62,6 +63,7 @@ public class SecurityConfig {
 	
 		return http.build();
 	}
+	
 	//configure AuthMgr as a spring bean
 	@Bean
 	public AuthenticationManager authenticationManager

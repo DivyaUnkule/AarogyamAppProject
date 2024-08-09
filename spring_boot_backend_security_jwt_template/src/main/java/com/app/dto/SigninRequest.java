@@ -16,7 +16,7 @@ public class SigninRequest {
 	@Email(message = "Invalid email format")
 	private String email;
 	@NotEmpty
-	@Length(min = 3,max=20,message = "Invalid password length")
+	@Length(min = 3,max=10,message = "Invalid password length")
 	private String password;
 	public String getEmail() {
 		return email;
