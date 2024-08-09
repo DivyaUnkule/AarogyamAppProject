@@ -66,34 +66,18 @@ public class UserSignInSignupController {
 	 */
 	
 	@PostMapping("/signin")
-	public ResponseEntity<?> authenticateUser(@RequestBody @Valid SigninRequest loginRequest) {
-	    try {
-	        // Perform authentication
-	        Authentication authentication = authMgr.authenticate(
-	            new UsernamePasswordAuthenticationToken(
-	                loginRequest.getEmail(),
-	                loginRequest.getPassword()
-	            )
-	        );
-
-	        // Set authentication context
-	        SecurityContextHolder.getContext().setAuthentication(authentication);
-
-	        // Generate JWT token
-	        String jwt = jwtUtils.generateJwtToken(authentication);
-
-	        // Fetch user details
-	        Login user = userService.fetchByEmail(loginRequest.getEmail());
-
-	        // Check if user is active
-	        if (user.getStatus() == Status.ACTIVE) {
-	            return ResponseEntity.ok(new SigninResponse(jwt, user));
-	        } else {
-	            return ResponseEntity.badRequest().body("User is not active.");
-	        }
-	    } catch (Exception e) {
-	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password.");
-	    }
+	public ResponseEntity<?> authenticateUser(@RequestBody @Valid SigninRequest request) {
+		System.out.println("in sign in" + request);
+		// 1. create a token(implementation of Authentication i/f)
+		// to store un verified user email n pwd
+		UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(request.getEmail(),
+				request.getPassword());
+		//2.  invoke auth mgr's authenticate method;
+		Authentication verifiedToken = authMgr.authenticate(token);
+			// => authentication n authorization successful !
+			//3. In case of successful auth,  create JWT n send it to the clnt in response
+		SigninResponse resp = new SigninResponse(jwtUtils.generateJwtToken(verifiedToken), "Successful Auth!!!!");
+		return ResponseEntity.status(HttpStatus.CREATED).body(resp);
 	}
 
 	

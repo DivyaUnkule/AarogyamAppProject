@@ -26,7 +26,7 @@ public interface IUserService {
 	
 	ApiResponse uploadImage(Long userId, MultipartFile imageFile) throws IOException;
 	
-	Login fetchByEmail(String email);
+	//Login fetchByEmail(String email);
 	
 	
 	

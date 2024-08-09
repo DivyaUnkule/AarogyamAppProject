@@ -103,10 +103,10 @@ public class UserServiceImpl implements IUserService {
 		return new ApiResponse("Image Uploaded successfully!");
 	}
 	
-	@Override
+	/*@Override
 	public Login fetchByEmail(String email) {
 	    return loginRepo.findByEmailIgnoreCase(email)
 	        .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
-	}
+	}*/
 
 }

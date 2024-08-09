@@ -4,33 +4,34 @@ import com.app.entities.Login;
 
 public class SigninResponse {
 	private String jwt;
-	private Login user;
-	
-	
-	public SigninResponse() {
-		super();
-	}
-	public SigninResponse(String jwt, Login user) {
-		super();
-		this.jwt = jwt;
-		this.user = user;
-	}
+	private String msg;
 	public String getJwt() {
 		return jwt;
 	}
 	public void setJwt(String jwt) {
 		this.jwt = jwt;
 	}
-	public Login getUser() {
-		return user;
+	public String getMsg() {
+		return msg;
 	}
-	public void setUser(Login user) {
-		this.user = user;
+	public void setMsg(String msg) {
+		this.msg = msg;
+	}
+	public SigninResponse(String jwt, String msg) {
+		super();
+		this.jwt = jwt;
+		this.msg = msg;
+	}
+	public SigninResponse() {
+		super();
 	}
 	@Override
 	public String toString() {
-		return "SigninResponse [jwt=" + jwt + ", user=" + user + "]";
+		return "SigninResponse [jwt=" + jwt + ", msg=" + msg + "]";
 	}
+	
+	
+	
 	
 	
 	
