@@ -51,6 +51,8 @@ public class SecurityConfig {
         .antMatchers("/users/weightgainuser/**").permitAll()
         .antMatchers("/users/regularuser/**").permitAll()
         .antMatchers("/users/user/**").permitAll()
+        .antMatchers("/users/updateOwnDetails").permitAll()
+        .antMatchers("/users/getUser").permitAll()
         .antMatchers("/users/{Id}/image_upload").permitAll()
         .anyRequest().authenticated()
 		.and()

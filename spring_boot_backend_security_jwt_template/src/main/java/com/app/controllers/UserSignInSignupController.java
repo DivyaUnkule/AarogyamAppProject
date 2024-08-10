@@ -12,6 +12,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,6 +26,7 @@ import com.app.dto.SigninResponse;
 import com.app.dto.Signup;
 import com.app.dto.UserRegResponse;
 import com.app.entities.Login;
+import com.app.enums.Role;
 import com.app.enums.Status;
 import com.app.security.CustomUserDetails;
 import com.app.security.JwtUtils;
@@ -32,6 +34,7 @@ import com.app.services.IUserService;
 
 @RestController
 @RequestMapping("/users")
+@CrossOrigin
 public class UserSignInSignupController {
 	@Autowired
 	private IUserService userService;
@@ -65,7 +68,7 @@ public class UserSignInSignupController {
 	 * 
 	 */
 	
-	@PostMapping("/signin")
+	/*@PostMapping("/signin")
 	public ResponseEntity<?> authenticateUser(@RequestBody @Valid SigninRequest request) {
 		System.out.println("in sign in" + request);
 		// 1. create a token(implementation of Authentication i/f)
@@ -78,11 +81,35 @@ public class UserSignInSignupController {
 			//3. In case of successful auth,  create JWT n send it to the clnt in response
 		SigninResponse resp = new SigninResponse(jwtUtils.generateJwtToken(verifiedToken), "Successful Auth!!!!");
 		return ResponseEntity.status(HttpStatus.CREATED).body(resp);
+	}*/
+	
+	@PostMapping("/signin")
+	public ResponseEntity<?> authenticateUser(@RequestBody @Valid SigninRequest request) {
+	    System.out.println("in sign in" + request);
+	    
+	    // 1. Create a token to store unverified user email and password
+	    UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(request.getEmail(),
+	            request.getPassword());
+	    
+	    // 2. Authenticate using AuthenticationManager
+	    Authentication verifiedToken = authMgr.authenticate(token);
+
+	    // 3. Authentication and authorization successful, generate JWT token
+	    String jwt = jwtUtils.generateJwtToken(verifiedToken);
+	    
+	    // 4. Get user role from the authenticated user
+	    CustomUserDetails userDetails = (CustomUserDetails) verifiedToken.getPrincipal();
+	    // Convert the authority string back to the Role enum
+	    Role role = Role.valueOf(userDetails.getAuthorities().stream()
+	                    .findFirst().get().getAuthority());
+
+	    // 5. Create a response object with JWT and role
+	    SigninResponse resp = new SigninResponse(jwt, role, "Successful Auth!!!!");
+	    
+	    // 6. Return the response
+	    return ResponseEntity.status(HttpStatus.CREATED).body(resp);
 	}
 
-	
-    
-	
 	@PostMapping(value="/{Id}/image_upload",consumes = "multipart/form-data")
 	public ResponseEntity<?> uploadImageToServerSideFolder(@PathVariable Long Id,
 			@RequestParam MultipartFile imageFile) throws IOException{
