@@ -21,6 +21,7 @@ import CreateWaterIntake from './Pages/CreateWaterIntake';
 import WaterIntakeUpdate from './Pages/WaterIntakeUpdate';
 import DeleteWaterIntake from './Pages/DeleteWaterIntake';
 import WaterIntakeList from './Pages/WaterIntakeList';
+import GetWaterIntakeById from './Pages/GetWaterIntakeById';
 
 
 
@@ -51,6 +52,8 @@ function App() {
         <Route path="/admin/updatewaterintake" element={<WaterIntakeUpdate />} />
         <Route path="/admin/deletewaterintake" element={<DeleteWaterIntake />} />
         <Route path="/admin/getwaterintakes" element={<WaterIntakeList />} />
+        <Route path="/admin/getwaterintakebyid" element={<GetWaterIntakeById />} />
+        
 
        
         

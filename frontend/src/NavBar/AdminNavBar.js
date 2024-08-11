@@ -29,6 +29,7 @@ const AdminNavbar = () => {
           <NavDropdown.Item href="/admin/getwaterintakes">View Water Intakes</NavDropdown.Item>
           <NavDropdown.Item href="/admin/updatewaterintake">Update Water Intake</NavDropdown.Item>
           <NavDropdown.Item href="/admin/deletewaterintake">Delete Water Intake</NavDropdown.Item>
+          <NavDropdown.Item href="/admin/getwaterintakebyid">View Water Intake By Id</NavDropdown.Item>
           </NavDropdown>
            <NavDropdown title="Exercise & Yoga" id="exercise-dropdown">
             <NavDropdown.Item href="/admin/insertexercise">Insert Exercise</NavDropdown.Item>

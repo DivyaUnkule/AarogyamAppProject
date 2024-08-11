@@ -23,19 +23,13 @@ const AuthPage = () => {
   };
 
   const handleRoleChange = (e) => {
-    const { value, checked } = e.target;
-    let updatedRoles = [...formData.roles];
-    if (checked) {
-      updatedRoles.push(value);
-    } else {
-      updatedRoles = updatedRoles.filter(role => role !== value);
-    }
-    setFormData({ ...formData, roles: updatedRoles });
+    const { value } = e.target;
+    setFormData({ ...formData, roles: [value] });
   };
 
   const validateForm = () => {
     let newErrors = {};
-    
+
     // Email validation
     if (!/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = 'Invalid email format';
@@ -66,10 +60,13 @@ const AuthPage = () => {
       try {
         const response = await axios.post('http://localhost:8080/users/signup', formData);
         console.log('User registered successfully:', response.data);
-        // Handle success (e.g., show success message, redirect)
+        // Display success message and redirect to sign-in page
+        alert('Registration successful!');
+        window.location.href = '/'; // Adjust this URL if your sign-in page URL is different
       } catch (error) {
         console.error('Registration failed:', error);
         // Handle error (e.g., show error message)
+        alert('Registration failed! Please try again.');
       }
     }
   };
@@ -180,14 +177,14 @@ const AuthPage = () => {
             </Form.Group>
           </Col>
           <Col md={6}>
-          <Form.Group className="mb-3">
-          <Form.Label>Roles</Form.Label>
-              <Form.Select name="role" value={formData.role} onChange={handleChange}>
+            <Form.Group className="mb-3">
+              <Form.Label>Roles</Form.Label>
+              <Form.Select name="roles" value={formData.roles[0] || ''} onChange={handleRoleChange}>
                 <option value="">Select Role</option>
                 <option value="ROLE_ADMIN">Admin</option>
-                <option value="ROLE_REGULARUSER">Regularuser</option>
-                <option value="ROLE_WEIGHTLOSSUSER">Weightlossuser</option>
-                <option value="ROLE_WEIGHTGAINUSER">Weightgainuser</option>
+                <option value="ROLE_REGULARUSER">Regular User</option>
+                <option value="ROLE_WEIGHTLOSSUSER">Weight Loss User</option>
+                <option value="ROLE_WEIGHTGAINUSER">Weight Gain User</option>
               </Form.Select>
             </Form.Group>
           </Col>
