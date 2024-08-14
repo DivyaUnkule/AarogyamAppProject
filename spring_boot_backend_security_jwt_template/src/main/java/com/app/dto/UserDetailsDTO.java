@@ -23,7 +23,7 @@ public class UserDetailsDTO {
     private Status status;
     private String address;
     private Gender gender;
-    private Set<RoleEntity> roles;  // Roles assigned to the user
+    private Set<RoleEntity> roles;  
 	public String getEmail() {
 		return email;
 	}

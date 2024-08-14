@@ -23,6 +23,14 @@ import DeleteWaterIntake from './Pages/DeleteWaterIntake';
 import WaterIntakeList from './Pages/WaterIntakeList';
 import GetWaterIntakeById from './Pages/GetWaterIntakeById';
 
+import UserRegistrationPage from './Pages/UserRegistrationPage';
+import UserListPage from './Pages/UserListPage';
+import UserDetailsPage from './Pages/UserDetailsPage';
+import UpdateUserPage from './Pages/UpdateUserPage';
+import DeleteUserPage from './Pages/DeleteUserPage';
+
+import ProfilePicUpload from './Pages/ProfilePicUpload';
+import UserProfileImage from './Pages/UserProfileImage';
 
 
 
@@ -53,6 +61,22 @@ function App() {
         <Route path="/admin/deletewaterintake" element={<DeleteWaterIntake />} />
         <Route path="/admin/getwaterintakes" element={<WaterIntakeList />} />
         <Route path="/admin/getwaterintakebyid" element={<GetWaterIntakeById />} />
+
+        {/*User*/}
+        <Route path="/admin/addUser" element={<UserRegistrationPage />} />
+        <Route path="/admin/getAllUsers" element={<UserListPage />} />
+        <Route path="/admin/getUserById" element={<UserDetailsPage />} />
+        <Route path="/admin/updateUserDetails" element={<UpdateUserPage />} />
+        <Route path="/admin/deleteUserById" element={<DeleteUserPage />} />
+        <Route path="/{Id}/image_upload" element={<ProfilePicUpload />} />
+        <Route path="/{userId}/image" element={<UserProfileImage />} />
+
+        
+
+
+        
+        
+
         
 
        

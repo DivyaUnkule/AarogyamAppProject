@@ -54,6 +54,8 @@ public class SecurityConfig {
         .antMatchers("/users/updateOwnDetails").permitAll()
         .antMatchers("/users/getUser").permitAll()
         .antMatchers("/users/{Id}/image_upload").permitAll()
+        .antMatchers("/users/{userId}/image").permitAll()
+        
         .anyRequest().authenticated()
 		.and()
 		//to tell spring sec : not to use HttpSession to store user's auth details

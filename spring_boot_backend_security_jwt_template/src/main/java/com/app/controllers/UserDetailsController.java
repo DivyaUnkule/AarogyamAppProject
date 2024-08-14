@@ -13,6 +13,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
+@CrossOrigin("http://localhost:3000")
 public class UserDetailsController {
 
     @Autowired
@@ -27,15 +28,15 @@ public class UserDetailsController {
 
     // Admin: Get all users info
     @GetMapping("/admin/getAllUsers")
-    public ResponseEntity<List<Login>> getAllUsers() {
-        List<Login> users = userService.getAllUsers();
+    public ResponseEntity<List<UserDetailsDTO>> getAllUsers() {
+        List<UserDetailsDTO> users = userService.getAllUsers();
         return ResponseEntity.ok(users);
     }
 
     // Admin: Get user by ID
     @GetMapping("/admin/getUserById")
-    public ResponseEntity<Optional<Login>> getUserById(@RequestParam Long id) {
-        Optional<Login> user = userService.getUserById(id);
+    public ResponseEntity<UserDetailsDTO> getUserById(@RequestParam Long id) {
+    	UserDetailsDTO user = userService.getUserById(id);
         return ResponseEntity.ok(user);
     }
 
@@ -48,7 +49,7 @@ public class UserDetailsController {
 
     // Admin: Delete user by ID
     @DeleteMapping("/admin/deleteUserById")
-    public ResponseEntity<?> deleteUser(@RequestBody Long id) {
+    public ResponseEntity<?> deleteUser(@RequestParam Long id) {
         userService.deleteUser(id);
         return ResponseEntity.ok().build();
     }
@@ -60,9 +61,9 @@ public class UserDetailsController {
         return ResponseEntity.ok(updatedUser);
     }
   // Users: Get user By ID
-    @GetMapping("/getUser")
-    public ResponseEntity<Optional<Login>> getUser(@RequestParam Long id) {
-        Optional<Login> user = userService.getUserById(id);
+   @GetMapping("/getUser")
+    public ResponseEntity<UserDetailsDTO> getUser(@RequestParam Long id) {
+    	UserDetailsDTO user = userService.getUserById(id);
         return ResponseEntity.ok(user);
     }
     

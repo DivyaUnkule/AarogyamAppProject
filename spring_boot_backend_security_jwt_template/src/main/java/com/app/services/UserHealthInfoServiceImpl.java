@@ -60,14 +60,14 @@ public class UserHealthInfoServiceImpl implements IUserHealthInfoService {
             // Save UserHealthInfo
             UserHealthInfo updatedUserHealthInfo = userHealthInfoRepository.save(existingUserHealthInfo);
 
-          /*  // Update Progress
+           // Update Progress
             Progress progress = progressrepository.findByUser(existingUserHealthInfo.getUser())
                     .orElse(new Progress(existingUserHealthInfo.getUser(), existingUserHealthInfo.getWeight(), (userHealthInfoDTO.getWeight() / (userHealthInfoDTO.getHeight() * userHealthInfoDTO.getHeight()))));
 
             progress.setNewWeight(userHealthInfoDTO.getWeight());
             progress.setBmi(Math.round((userHealthInfoDTO.getWeight() / (userHealthInfoDTO.getHeight() * userHealthInfoDTO.getHeight())) * 100.0) / 100.0);
             
-            progressrepository.save(progress);*/
+            progressrepository.save(progress);
 
             return updatedUserHealthInfo;
         } else {

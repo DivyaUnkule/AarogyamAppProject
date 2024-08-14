@@ -12,6 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
+@CrossOrigin("http://localhost:3000")
 public class UserHealthInfoController {
 
     @Autowired
@@ -19,35 +20,18 @@ public class UserHealthInfoController {
 
     // Admin-specific operations
 
-    @PostMapping("/admin/insertuserhealthinfo")
-    public ResponseEntity<UserHealthInfo> createUserHealthInfo(@RequestBody UserHealthInfoDTO userHealthInfoDTO) {
-        UserHealthInfo createdUserHealthInfo = userHealthInfoService.createUserHealthInfo(userHealthInfoDTO);
-        return ResponseEntity.ok(createdUserHealthInfo);
-    }
-
     @GetMapping("/admin/getuserhealthinfos")
     public ResponseEntity<List<UserHealthInfo>> getAllUserHealthInfos() {
         List<UserHealthInfo> userHealthInfos = userHealthInfoService.getAllUserHealthInfos();
         return ResponseEntity.status(200).body(userHealthInfos);
     }
 
-    @GetMapping("/admin/getuserhealthinfobyId/{id}")
-    public ResponseEntity<Optional<UserHealthInfo>> getUserHealthInfoById(@PathVariable Long id) {
+    @GetMapping("/admin/getuserhealthinfobyId")
+    public ResponseEntity<Optional<UserHealthInfo>> getUserHealthInfoById(@RequestParam Long id) {
         Optional<UserHealthInfo> userHealthInfo = userHealthInfoService.getUserHealthInfoById(id);
         return ResponseEntity.ok(userHealthInfo);
     }
 
-    @PutMapping("/admin/updateuserhealthinfo")
-    public ResponseEntity<UserHealthInfo> updateUserHealthInfo(@RequestBody UserHealthInfoDTO userHealthInfoDTO) {
-        UserHealthInfo updatedUserHealthInfo = userHealthInfoService.updateUserHealthInfo(userHealthInfoDTO);
-        return ResponseEntity.ok(updatedUserHealthInfo);
-    }
-
-    @DeleteMapping("/admin/deleteuserhealthinfo")
-    public ResponseEntity<?> deleteUserHealthInfo(@RequestBody Long id) {
-        userHealthInfoService.deleteUserHealthInfo(id);
-        return ResponseEntity.ok().build();
-    }
 
     // User-specific operations
 

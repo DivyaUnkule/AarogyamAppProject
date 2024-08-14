@@ -13,6 +13,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
+@CrossOrigin("http://localhost:3000")
 public class WaterIntakeController {
 
     @Autowired
@@ -32,8 +33,8 @@ public class WaterIntakeController {
         return ResponseEntity.status(200).body(waterIntakes);
     }
 
-    @GetMapping("/admin/getwaterintakebyid/{id}")
-    public ResponseEntity<Optional<WaterIntake>> getWaterIntakeById(@PathVariable Long id) {
+    @GetMapping("/admin/getwaterintakebyid")
+    public ResponseEntity<Optional<WaterIntake>> getWaterIntakeById(@RequestParam Long id) {
         Optional<WaterIntake> waterIntake = waterIntakeService.getWaterIntakeById(id);
         return ResponseEntity.ok(waterIntake);
     }
@@ -45,7 +46,7 @@ public class WaterIntakeController {
     }
 
     @DeleteMapping("/admin/deletewaterintake")
-    public ResponseEntity<?> deleteWaterIntake(@RequestBody Long id) {
+    public ResponseEntity<?> deleteWaterIntake(@RequestParam Long id) {
         waterIntakeService.deleteWaterIntake(id);
         return ResponseEntity.ok().build();
     }

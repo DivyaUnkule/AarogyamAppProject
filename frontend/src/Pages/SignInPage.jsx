@@ -12,7 +12,7 @@ const SignInPage = () => {
 
   const validateForm = () => {
     const newErrors = {};
-    
+
     if (!email) {
       newErrors.email = "Email can't be blank";
     } else if (!/\S+@\S+\.\S+/.test(email)) {
@@ -34,10 +34,11 @@ const SignInPage = () => {
     if (validateForm()) {
       try {
         const response = await axios.post('http://localhost:8080/users/signin', { email, password });
-        const { jwt, role } = response.data;
+        const { jwt, role, userId } = response.data;
 
-        // Store JWT token in local storage or a context/state management solution
+        // Store JWT token and userId in local storage
         localStorage.setItem('token', jwt);
+        localStorage.setItem('userId', userId);
 
         // Handle successful sign-in with role-based redirection
         if (role === 'ROLE_ADMIN') {

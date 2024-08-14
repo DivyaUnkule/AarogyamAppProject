@@ -41,14 +41,23 @@ const AdminNavbar = () => {
           <NavDropdown title="User Management" id="user-dropdown">
             <NavDropdown.Item href="/admin/addUser">Add User</NavDropdown.Item>
             <NavDropdown.Item href="/admin/getAllUsers">View All Users</NavDropdown.Item>
+            <NavDropdown.Item href="/admin/getUserById">View User By Id</NavDropdown.Item>
             <NavDropdown.Item href="/admin/updateUserDetails">Update User</NavDropdown.Item>
             <NavDropdown.Item href="/admin/deleteUserById">Delete User</NavDropdown.Item>
+            <NavDropdown.Item href="/{Id}/image_upload">Upload Profile Picture</NavDropdown.Item>
+            <NavDropdown.Item href="/{userId}/image"> View Profile Picture</NavDropdown.Item>
+
           </NavDropdown>
           <NavDropdown title="User Health Info" id="health-info-dropdown">
             <NavDropdown.Item href="/admin/getuserhealthinfos">View Health Infos</NavDropdown.Item>
-            <NavDropdown.Item href="/admin/getuserhealthinfobyId/">View Health Info By Id</NavDropdown.Item>
+            <NavDropdown.Item href="/admin/getUserById">View Health Info By Id</NavDropdown.Item>
           </NavDropdown>
-        <Nav>
+          <NavDropdown title="Profile" id="user-dropdown">
+            <NavDropdown.Item href="/{Id}/image_upload">Edit Profile Picture</NavDropdown.Item>
+            <NavDropdown.Item href="/{userId}/image"> View Profile Picture</NavDropdown.Item>
+
+          </NavDropdown>
+         <Nav>
             </Nav>
           <NavDropdown title="Admin" id="basic-nav-dropdown">
             <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>

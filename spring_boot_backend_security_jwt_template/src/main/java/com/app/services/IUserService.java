@@ -2,21 +2,20 @@ package com.app.services;
 
 import java.io.IOException;
 
-import javax.transaction.Transactional;
 
+
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import com.app.dto.ApiResponse;
-import com.app.dto.SigninRequest;
-import com.app.dto.SigninResponse;
+
 import com.app.dto.Signup;
 import com.app.dto.UserRegResponse;
-import com.app.entities.Login;
 
-import io.swagger.v3.oas.annotations.servers.Server;
+
 
 public interface IUserService {
 
@@ -26,7 +25,9 @@ public interface IUserService {
 	
 	ApiResponse uploadImage(Long userId, MultipartFile imageFile) throws IOException;
 	
-	//Login fetchByEmail(String email);
+	byte[] serveImage(Long clientId) throws IOException;
+	
+	void logout(Authentication authentication);
 	
 	
 	

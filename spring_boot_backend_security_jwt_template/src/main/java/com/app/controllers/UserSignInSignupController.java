@@ -13,6 +13,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -97,18 +98,21 @@ public class UserSignInSignupController {
 	    // 3. Authentication and authorization successful, generate JWT token
 	    String jwt = jwtUtils.generateJwtToken(verifiedToken);
 	    
-	    // 4. Get user role from the authenticated user
+	    // 4. Get user role and user ID from the authenticated user
 	    CustomUserDetails userDetails = (CustomUserDetails) verifiedToken.getPrincipal();
-	    // Convert the authority string back to the Role enum
+	    
+	    Long userId = userDetails.getId();  // Fetch the user ID
 	    Role role = Role.valueOf(userDetails.getAuthorities().stream()
 	                    .findFirst().get().getAuthority());
 
-	    // 5. Create a response object with JWT and role
-	    SigninResponse resp = new SigninResponse(jwt, role, "Successful Auth!!!!");
+	    // 5. Create a response object with JWT, role, and userId
+	    SigninResponse resp = new SigninResponse(jwt, role, userId, "Successful Auth!!!!");
 	    
 	    // 6. Return the response
 	    return ResponseEntity.status(HttpStatus.CREATED).body(resp);
 	}
+
+
 
 	@PostMapping(value="/{Id}/image_upload",consumes = "multipart/form-data")
 	public ResponseEntity<?> uploadImageToServerSideFolder(@PathVariable Long Id,
@@ -116,6 +120,25 @@ public class UserSignInSignupController {
 		System.out.println("in upload img " + Id + " " + imageFile.getOriginalFilename());
 		return new ResponseEntity<>(userService.uploadImage(Id, imageFile), HttpStatus.CREATED);
 	}
+	
+	@GetMapping(value = "/{userId}/image", produces = { MediaType.IMAGE_GIF_VALUE, 
+			MediaType.IMAGE_JPEG_VALUE,
+			MediaType.IMAGE_PNG_VALUE  })
+	public ResponseEntity<?> serveImageFromServerSideFolder(@PathVariable Long userId) throws IOException {
+		System.out.println("in serve img " + userId);
+		return new ResponseEntity<>(userService.serveImage(userId), HttpStatus.OK);
+	}
+	
+	@PostMapping("/logout")
+    public ResponseEntity<String> logout() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null) {
+        	userService.logout(authentication);
+            return new ResponseEntity<>("Logout successful", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("No user is currently logged in", HttpStatus.BAD_REQUEST);
+        }
+    }
 	
 	
 

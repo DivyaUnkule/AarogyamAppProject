@@ -5,14 +5,15 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.time.Clock;
+
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+
+
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,14 +23,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.app.custom_exception_handler.ResourceNotFoundException;
 import com.app.dto.ApiResponse;
-import com.app.dto.SigninRequest;
-import com.app.dto.SigninResponse;
+
 import com.app.dto.Signup;
 import com.app.dto.UserRegResponse;
 import com.app.entities.Login;
 import com.app.repositories.LoginRepo;
 import com.app.repositories.RoleEntityRepo;
-import com.app.repositories.UserRepo;
+
 import com.app.security.CustomUserDetails;
 
 
@@ -47,8 +47,7 @@ public class UserServiceImpl implements IUserService {
 		private PasswordEncoder encoder;
 		@Autowired
 		private RoleEntityRepo roleRepo;
-		@Autowired
-		private AuthenticationManager authMgr;
+		
 
 		@Autowired
 		private LoginRepo loginRepo;
@@ -70,15 +69,7 @@ public class UserServiceImpl implements IUserService {
 		// 3. encode pwd
 		userEntity.setPassword(encoder.encode(reqDTO.getPassword()));
 		
-	/*Clock clock = Clock.systemDefaultZone();
-	long milliSeconds = clock.millis();
-         MultipartFile profilePictureFile = reqDTO.getProfilePicPath();
-         String completePath = profilePictureFolderPath + File.separator + milliSeconds
-				+ profilePictureFile.getOriginalFilename();
-			Files.copy(profilePictureFile.getInputStream(), Paths.get(completePath),
-					StandardCopyOption.REPLACE_EXISTING);
-
-		userEntity.setProfilePicPath(completePath);*/
+	
 		userEntity.setUserRoles(roleRepo.findByRoleNameIn(reqDTO.getRoles()));
 		userEntity.setPassword(encoder.encode(reqDTO.getPassword()));
 		
@@ -103,10 +94,23 @@ public class UserServiceImpl implements IUserService {
 		return new ApiResponse("Image Uploaded successfully!");
 	}
 	
-	/*@Override
-	public Login fetchByEmail(String email) {
-	    return loginRepo.findByEmailIgnoreCase(email)
-	        .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
-	}*/
+	@Override
+	public byte[] serveImage(Long userId) throws IOException {
+		Login user = userDao.findById(userId)
+				.orElseThrow(() -> new ResourceNotFoundException("Invalid client Id : Image Download failed!!!!!!!!"));
+		String path = user.getProfilePicPath();
+		if (path == null)
+			throw new ResourceNotFoundException("Image does not exist !!!!!");
+		return Files.readAllBytes(Paths.get(path));
+
+	}
+	
+	 @Override
+	    public void logout(Authentication authentication) {
+	        
+	        SecurityContextHolder.clearContext();
+	    }
+	
+	
 
 }

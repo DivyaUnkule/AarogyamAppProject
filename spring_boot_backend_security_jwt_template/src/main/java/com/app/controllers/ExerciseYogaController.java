@@ -18,6 +18,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
+@CrossOrigin("http://localhost:3000")
 public class ExerciseYogaController {
 
     @Autowired
@@ -40,7 +41,7 @@ public class ExerciseYogaController {
     }
     
     @GetMapping("/admin/getexercisebyId")
-    public ResponseEntity<Optional<ExerciseYoga>> getExerciseYogaById(@RequestBody Long id) {
+    public ResponseEntity<Optional<ExerciseYoga>> getExerciseYogaById(@RequestParam Long id) {
     	Optional<ExerciseYoga> exerciseyoga = exerciseYogaService.getExerciseYogaById(id);
         return ResponseEntity.ok(exerciseyoga);
     }
@@ -52,7 +53,7 @@ public class ExerciseYogaController {
     }
 
     @DeleteMapping("/admin/deleteexercise")
-    public ResponseEntity<?> deleteExerciseYoga(@RequestBody Long id) {
+    public ResponseEntity<?> deleteExerciseYoga(@RequestParam Long id) {
         exerciseYogaService.deleteExerciseYoga(id);
         return ResponseEntity.ok().build();
     }

@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IUserDetailsService {
-    Login createUser(UserDetailsDTO userDTO);
-    List<Login> getAllUsers();
-    Optional<Login> getUserById(Long id);
+   Login createUser(UserDetailsDTO userDTO);
+   List<UserDetailsDTO> getAllUsers();
+   UserDetailsDTO getUserById(Long id);
     Login updateUser(UserDetailsDTO userDTO);
     void deleteUser(Long id);
    

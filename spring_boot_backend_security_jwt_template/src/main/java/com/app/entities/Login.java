@@ -10,7 +10,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.PrePersist;
+
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 
@@ -36,7 +36,7 @@ public class Login extends BaseEntity {
 	private String lastName;
 	@Column(length=300)
 	private String profilePicPath;
-	@Column(length = 14, unique = true)
+	@Column(length = 14)
 	private String phoneNo;
 	@Enumerated(EnumType.STRING)
 	@Column(length = 20, nullable = false)

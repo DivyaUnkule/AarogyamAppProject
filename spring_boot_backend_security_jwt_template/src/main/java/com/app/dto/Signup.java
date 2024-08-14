@@ -38,7 +38,7 @@ public class Signup {
 	private String lastName;
 	/*@Column(nullable = false)
 	private MultipartFile profilePicPath;*/
-	@Column(length = 14, unique = true)
+	@Column(length = 14)
 	private String phoneNo;
 	@Enumerated(EnumType.STRING)
 	@Column(length = 20, nullable = false)
