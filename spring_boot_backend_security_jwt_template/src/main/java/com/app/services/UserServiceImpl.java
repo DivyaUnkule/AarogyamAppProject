@@ -55,10 +55,7 @@ public class UserServiceImpl implements IUserService {
 		private String profilePictureFolderPath;
 		
 		
-		public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-			Login user = userDao.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("Invalid Email ID !!"));
-			return new CustomUserDetails(user);
-		}
+		
 
 	public UserRegResponse userRegistration(Signup reqDTO) throws IOException {
 		//dto --> entity
@@ -110,6 +107,24 @@ public class UserServiceImpl implements IUserService {
 	        
 	        SecurityContextHolder.clearContext();
 	    }
+	 
+	 
+
+	     @Override
+	     public Login fetchByEmail(String email) {
+	         // Find user by email using the repository method
+	         return userDao.findByEmailIgnoreCase(email);
+	     }
+	 
+
+	 
+	 @Override
+	 public void updateUser(Login user) {
+		 userDao.save(user);
+		}
+
+	 
+	 
 	
 	
 

@@ -6,6 +6,7 @@ import com.app.services.IUserDetailsService;
 import com.app.services.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,6 +35,7 @@ public class UserDetailsController {
     }
 
     // Admin: Get user by ID
+    
     @GetMapping("/admin/getUserById")
     public ResponseEntity<UserDetailsDTO> getUserById(@RequestParam Long id) {
     	UserDetailsDTO user = userService.getUserById(id);
@@ -67,10 +69,7 @@ public class UserDetailsController {
         return ResponseEntity.ok(user);
     }
     
-    //password
-    //profile pic download
-    //logout
-    //payment
+    
     
     
  

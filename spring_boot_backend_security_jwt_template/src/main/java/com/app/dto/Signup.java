@@ -36,8 +36,7 @@ public class Signup {
 	private String firstName;
 	@Column
 	private String lastName;
-	/*@Column(nullable = false)
-	private MultipartFile profilePicPath;*/
+	
 	@Column(length = 14)
 	private String phoneNo;
 	@Enumerated(EnumType.STRING)
@@ -102,12 +101,7 @@ public class Signup {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	/*public MultipartFile getProfilePicPath() {
-		return profilePicPath;
-	}
-	public void setProfilePicPath(MultipartFile profilePicPath) {
-		this.profilePicPath = profilePicPath;
-	}*/
+	
 	public String getPhoneNo() {
 		return phoneNo;
 	}
@@ -145,12 +139,7 @@ public class Signup {
 				+ status + ", address=" + address + ", gender=" + gender + ", roles=" + roles + "]";
 	}
 	
-	/*public String getAdminSecretKey() {
-		return adminSecretKey;
-	}
-	public void setAdminSecretKey(String adminSecretKey) {
-		this.adminSecretKey = adminSecretKey;
-	}*/
+	
 	
 	
 

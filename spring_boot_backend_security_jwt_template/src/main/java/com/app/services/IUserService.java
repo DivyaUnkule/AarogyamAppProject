@@ -14,6 +14,7 @@ import com.app.dto.ApiResponse;
 
 import com.app.dto.Signup;
 import com.app.dto.UserRegResponse;
+import com.app.entities.Login;
 
 
 
@@ -21,13 +22,15 @@ public interface IUserService {
 
 	UserRegResponse userRegistration(Signup user) throws IOException;
 
-	UserDetails loadUserByUsername(String email) throws UsernameNotFoundException;
+	void updateUser(Login user);
 	
 	ApiResponse uploadImage(Long userId, MultipartFile imageFile) throws IOException;
 	
 	byte[] serveImage(Long clientId) throws IOException;
 	
 	void logout(Authentication authentication);
+	
+	Login fetchByEmail(String email);
 	
 	
 	
