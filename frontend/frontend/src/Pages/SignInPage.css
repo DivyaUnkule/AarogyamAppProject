@@ -1,0 +1,103 @@
+.signin-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-image: url('https://img.freepik.com/free-photo/vegetables-salad-fruits-cornflakes-bowl-white-wooden-desk-with-space-writing-text_23-2148165580.jpg?w=996&t=st=1723546449~exp=1723547049~hmac=6232a293897fbc5edf5af08879703b7ea32838f69aab2a00178f77319736f828');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* Keeping the gradient as a fallback */
+  background-color: #6e8efb;
+ 
+}
+
+.signin-card {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+.signin-title {
+  color: #333;
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.signin-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.signin-input {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.signin-input:focus {
+  border-color: #6e8efb;
+  box-shadow: 0 0 0 2px rgba(110, 142, 251, 0.2);
+}
+
+.signin-button,
+.register-button {
+  padding: 0.75rem;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  margin-bottom: 1rem;
+}
+
+.signin-button {
+  background-color: #6e8efb;
+  border: none;
+}
+
+.signin-button:hover {
+  background-color: #5a7ae0;
+}
+
+.register-button {
+  background-color: transparent;
+  border: 2px solid #6e8efb;
+  color: #6e8efb;
+}
+
+.register-button:hover {
+  background-color: #6e8efb;
+  color: white;
+}
+
+.message-container {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.signin-message {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.signin-message a {
+  color: #6e8efb;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.signin-message a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 576px) {
+  .signin-card {
+    padding: 1.5rem;
+  }
+}

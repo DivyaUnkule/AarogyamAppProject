@@ -1,0 +1,54 @@
+body {
+    background-color: #f0f8ff; /* Light blue background */
+  }
+  
+  .meal-plan-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  h1 {
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .card-title {
+    background-color: #3498db;
+    color: white;
+    padding: 15px;
+    margin: -16px -16px 16px -16px;
+  }
+  
+  .list-group-item {
+    border: none;
+    padding: 15px 0;
+  }
+  
+  .list-group-item h5 {
+    color: #3498db;
+    margin-bottom: 5px;
+  }
+  
+  .list-group-item p {
+    color: #34495e;
+    margin-bottom: 0;
+  }
+  
+  .text-danger {
+    background-color: #ffebee;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }

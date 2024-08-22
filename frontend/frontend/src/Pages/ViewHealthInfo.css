@@ -1,0 +1,50 @@
+.health-info-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.health-info-title {
+  color: #4a90e2;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.health-info-item {
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+}
+
+.health-info-label {
+  font-weight: bold;
+  color: #4a90e2;
+  margin-right: 0.5rem;
+}
+
+.health-info-value {
+  color: #333;
+}
+
+.loading {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #4a90e2;
+  margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+  .health-info-container {
+    margin: 1rem;
+    padding: 1rem;
+  }
+
+  .health-info-title {
+    font-size: 1.5rem;
+  }
+}

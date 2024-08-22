@@ -1,0 +1,30 @@
+.regular-container{
+    min-height: 100vh;
+    background-image: url('https://img.freepik.com/free-vector/modern-medical-health-care-blue-banner-with-ecg-line-graph_1017-45512.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+  }
+  
+  .welcome-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 2rem;
+    border-radius: 10px;
+  }
+  
+  .welcome-overlay h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .welcome-overlay p {
+    font-size: 1.2rem;
+  }
+  
